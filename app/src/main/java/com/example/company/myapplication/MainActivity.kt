@@ -59,18 +59,33 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
 
     }
 
-    private fun checkWin ():Boolean {
-        for (int i = 0; i < 3; i++)
-        if ((table[i][0] == dot && table[i][1] == dot &&
-                        table[i][2] == dot) ||
-                (table[0][i] == dot && table[1][i] == dot &&
-                        table[2][i] == dot))
-            return true;
-        if ((table[0][0] == dot && table[1][1] == dot &&
-                        table[2][2] == dot) ||
-                (table[2][0] == dot && table[1][1] == dot &&
-                        table[0][2] == dot))
-            return true;
-        return false;
+    private fun checkWin (m:MutableList<MutableList<Spinner?>>, str:String):Boolean {
+        var dot: String = str
+        for (i in 0 until 3) {
+            if (((m[i][0]!!.selectedItem.toString()==dot) && (m[i][1]!!.selectedItem.toString()==dot) && (m[i][2]!!.selectedItem.toString()==dot))
+                || ((m[0][i]!!.selectedItem.toString()==dot)&&(m[1][i]!!.selectedItem.toString()==dot)&&(m[2][i]!!.selectedItem.toString()==dot))) {
+                return true
+            }
+            if (((m[0][0]!!.selectedItem.toString()==dot) && (m[1][1]!!.selectedItem.toString()==dot) && (m[2][2]!!.selectedItem.toString()==dot))
+                    || ((m[2][0]!!.selectedItem.toString()==dot)&&(m[1][1]!!.selectedItem.toString()==dot)&&(m[0][2]!!.selectedItem.toString()==dot))) {
+                return true
+            }
+        }
+         return false
     }
+
+//    private fun checkWin ():Boolean {
+//        for (int i = 0; i < 3; i++)
+//        if ((table[i][0] == dot && table[i][1] == dot &&
+//                        table[i][2] == dot) ||
+//                (table[0][i] == dot && table[1][i] == dot &&
+//                        table[2][i] == dot))
+//            return true;
+//        if ((table[0][0] == dot && table[1][1] == dot &&
+//                        table[2][2] == dot) ||
+//                (table[2][0] == dot && table[1][1] == dot &&
+//                        table[0][2] == dot))
+//            return true;
+//        return false;
+//    }
 }
