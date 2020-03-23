@@ -50,13 +50,33 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
         val toast = Toast.makeText(applicationContext,"${toChooseList[p2]}", duration)
-        toast.show()
+        checkMatrix(arraySpinner)
     }
 
     private fun checkMatrix (m:MutableList<MutableList<Spinner?>>) {
 
 
 
+        //if ((checkCountDot(m,"X")<5)&&(checkCountDot(m,"0")<4)) status.text = ""
+        //if ((checkCountDot(m,"X")<4)&&(checkCountDot(m,"0")<5)) status.text = ""
+
+        if (checkWin(m,"X")) status.text = "X won"
+        if (checkWin(m,"0")) status.text = "0 won"
+        if ((checkCountDot(m,"X")>5)||(checkCountDot(m,"0")>5)) status.text = "Invalid"
+        if ((checkCountDot(m,"X")==5)&&(checkCountDot(m,"0")==4)) status.text = "Draw"
+        if ((checkCountDot(m,"X")==4)&&(checkCountDot(m,"0")==5)) status.text = "Draw"
+
+    }
+
+    private fun checkCountDot (m:MutableList<MutableList<Spinner?>>, str:String):Int {
+        var dot: String = str
+        var sum: Int = 0
+        for (i:Int in 0 until m.size){
+            for (j:Int in 0 until m.size) {
+                if (m[i][j]!!.selectedItem.toString()== dot) sum=+1
+            }
+        }
+        return sum
     }
 
     private fun checkWin (m:MutableList<MutableList<Spinner?>>, str:String):Boolean {
@@ -73,19 +93,4 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
         }
          return false
     }
-
-//    private fun checkWin ():Boolean {
-//        for (int i = 0; i < 3; i++)
-//        if ((table[i][0] == dot && table[i][1] == dot &&
-//                        table[i][2] == dot) ||
-//                (table[0][i] == dot && table[1][i] == dot &&
-//                        table[2][i] == dot))
-//            return true;
-//        if ((table[0][0] == dot && table[1][1] == dot &&
-//                        table[2][2] == dot) ||
-//                (table[2][0] == dot && table[1][1] == dot &&
-//                        table[0][2] == dot))
-//            return true;
-//        return false;
-//    }
 }
