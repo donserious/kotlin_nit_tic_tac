@@ -55,16 +55,15 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
 
     private fun checkMatrix (m:MutableList<MutableList<Spinner?>>) {
 
+        if ((checkCountDot(m,"X")==5)&&(checkCountDot(m,"0")==4)) status.text = "Draw"
+        if ((checkCountDot(m,"X")==4)&&(checkCountDot(m,"0")==5)) status.text = "Draw"
 
 
-        //if ((checkCountDot(m,"X")<5)&&(checkCountDot(m,"0")<4)) status.text = ""
-        //if ((checkCountDot(m,"X")<4)&&(checkCountDot(m,"0")<5)) status.text = ""
+        if (checkCountDot(m,"")==7) status.text = "Invalid"
 
         if (checkWin(m,"X")) status.text = "X won"
         if (checkWin(m,"0")) status.text = "0 won"
         if ((checkCountDot(m,"X")>5)||(checkCountDot(m,"0")>5)) status.text = "Invalid"
-        if ((checkCountDot(m,"X")==5)&&(checkCountDot(m,"0")==4)) status.text = "Draw"
-        if ((checkCountDot(m,"X")==4)&&(checkCountDot(m,"0")==5)) status.text = "Draw"
 
     }
 
@@ -73,7 +72,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
         var sum: Int = 0
         for (i:Int in 0 until m.size){
             for (j:Int in 0 until m.size) {
-                if (m[i][j]!!.selectedItem.toString()== dot) sum=+1
+                if (m[i][j]!!.selectedItem.toString()== dot) sum += 1
             }
         }
         return sum
